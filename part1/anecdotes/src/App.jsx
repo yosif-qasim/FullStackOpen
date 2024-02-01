@@ -15,20 +15,27 @@ const App = () => {
     const [selected, setSelected] = useState(0)
     const [votes, setVotes] = useState(new Uint8Array(anecdotes.length))
 
+    let largest =votes.indexOf(Math.max(...votes))
+
     const newSelected = () => setSelected(Math.floor(Math.random() * anecdotes.length))
     const addPoint = () => {
         const newPoints = [...votes]
         newPoints[selected] += 1
         console.log(newPoints)
+        console.log(largest)
         return (setVotes(newPoints))
     }
 
     return (
         <center>
-        <h2>{anecdotes[selected]}</h2>
-            <h3>Has {votes[selected]} Votes  </h3>
-            <button onClick={newSelected}>Next </button>
+            <h1>Anecdote of the day </h1>
+            <h3>{anecdotes[selected]}</h3>
+            <h3>Has {votes[selected]} Votes </h3>
+            <button onClick={newSelected}>Next</button>
             <button onClick={addPoint}>Vote</button>
+            <h1>most voted Anecdote</h1>
+            <h3>{anecdotes[largest]}</h3>
+
         </center>
     )
 }
