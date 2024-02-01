@@ -5,9 +5,8 @@ import { useState } from 'react'
 const Header = ({header}) => <h1>{header}</h1>
 const Button = ({btnName , feedback}) => <button onClick={feedback}>{btnName}</button>
 
+const StatisticLine = ({statName , statValue}) => <p>{statName} : {statValue}</p>
 const Stastistics = ({good ,bad ,neutral , total , calcAvg , calcPositive }) => {
-
-
 
     if (good === 0 && bad === 0  && neutral === 0 ){
         return (
@@ -17,15 +16,17 @@ const Stastistics = ({good ,bad ,neutral , total , calcAvg , calcPositive }) => 
 
     return(
         <>
-            <p> Good {good}</p>
-            <p> Neutral {neutral}</p>
-            <p> Bad {bad}</p>
-            <p> Total {total}</p>
-            <p> Average {calcAvg(good, bad, neutral)}</p>
-            <p> Positive percent {calcPositive(good, bad, neutral)}% </p>
+            <StatisticLine statName={"Good"} statValue={good} />
+            <StatisticLine statName={"Neutral"} statValue={neutral} />
+            <StatisticLine statName={"Bad"} statValue={bad} />
+            <StatisticLine statName={"Total"} statValue={total} />
+            <StatisticLine statName={"Average"} statValue={calcAvg()} />
+            <StatisticLine statName={"Positive percent"} statValue={calcPositive()} />
+
         </>
     )
 }
+
 const App = () => {
     const [good, setGood] = useState(0)
     const [neutral, setNeutral] = useState(0)
