@@ -9,7 +9,11 @@ const Stastistics = ({good ,bad ,neutral}) => {
     const total = (good + bad + neutral)
     const calcAvg = (good, bad, neutral) => (good - bad) / (good + bad + neutral)
     const calcPositive = (good ,bad ,neutral) => ( (good) / (good + bad + neutral) )*100
-
+    if (good , bad , neutral === 0 ){
+        return (
+            <p>No Feedback !!! </p>
+        )
+    }
     return(
         <>
             <p> Good {good}</p>
