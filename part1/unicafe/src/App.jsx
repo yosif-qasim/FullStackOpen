@@ -5,7 +5,14 @@ import { useState } from 'react'
 const Header = ({header}) => <h1>{header}</h1>
 const Button = ({btnName , feedback}) => <button onClick={feedback}>{btnName}</button>
 
-const StatisticLine = ({statName , statValue}) => <p>{statName} : {statValue}</p>
+const StatisticLine = ({statName , statValue}) => {
+    return (
+        <tr>
+            <td>{statName}</td>
+            <td>{statValue}</td>
+        </tr>
+    )
+}
 const Stastistics = ({good ,bad ,neutral , total , calcAvg , calcPositive }) => {
 
     if (good === 0 && bad === 0  && neutral === 0 ){
@@ -15,7 +22,7 @@ const Stastistics = ({good ,bad ,neutral , total , calcAvg , calcPositive }) => 
     }
 
     return(
-        <>
+        <table>
             <StatisticLine statName={"Good"} statValue={good} />
             <StatisticLine statName={"Neutral"} statValue={neutral} />
             <StatisticLine statName={"Bad"} statValue={bad} />
@@ -23,7 +30,7 @@ const Stastistics = ({good ,bad ,neutral , total , calcAvg , calcPositive }) => 
             <StatisticLine statName={"Average"} statValue={calcAvg()} />
             <StatisticLine statName={"Positive percent"} statValue={calcPositive()} />
 
-        </>
+        </table>
     )
 }
 
