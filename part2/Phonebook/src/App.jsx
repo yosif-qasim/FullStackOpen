@@ -5,6 +5,13 @@ const App = () => {
     const [persons, setPersons] = useState(initial)
     const [newName, setNewName] = useState('')
 
+    const checkInput = (event) => {
+        event.preventDefault()
+        persons.find((p) => p.name === newName )
+            ? alert(`${newName} is already added to phonebook`)
+            : addPerson(event)
+    }
+
     const addPerson = (event) => {
         event.preventDefault()
         console.log("potato")
@@ -22,7 +29,7 @@ const App = () => {
     return (
         <>
             <h2>Phonebook</h2>
-            <form onSubmit={addPerson}>
+            <form onSubmit={checkInput}>
                 <div>
                     name: <input value={newName} onChange={addName}/>
                 </div>
