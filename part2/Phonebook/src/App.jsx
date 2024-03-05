@@ -11,7 +11,7 @@ const App = () => {
     const setContats = () => {
         console.log("inside setContact")
         axios
-            .get("http://localhost:3002/persons")
+            .get("http://localhost:3001/persons")
             .then( contacts =>{
                 console.log(contacts.data)
                 // initial = contacts.data
@@ -21,12 +21,12 @@ const App = () => {
 
 
      useEffect( setContats, [])
-    const initial = [
-        {name: 'Yosif qassim :)', number: '01016420200', id: 0},
-        {name: 'Arto Hellas', number: '040-123456', id: 1},
-        {name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
-        { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
-        { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }]
+    // const initial = [
+    //     {name: 'Yosif qassim :)', number: '01016420200', id: 0},
+    //     {name: 'Arto Hellas', number: '040-123456', id: 1},
+    //     {name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+    //     { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+    //     { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }]
 
     // let initial = []
     const [persons, setPersons] = useState([])
@@ -53,7 +53,8 @@ const App = () => {
             number : newNumber,
             id : persons.length +1
         }
-        setPersons(persons.concat(newObject))
+        axios.post("http://localhost:3001/persons",newObject)
+            .then( response => setPersons(persons.concat(response.data)))
         setNewName('')
     }
 
