@@ -16,4 +16,9 @@ const addContact = (newContact) => {
         .then( response => response.data)
 }
 
-export default {getContacts , addContact}
+const deleteContact = (id) => {
+    const url = baseurl + "/"+id;
+    console.log(url)
+    return axios.delete(url)
+}
+export default {getContacts , addContact , deleteContact}

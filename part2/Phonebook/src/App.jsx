@@ -35,7 +35,7 @@ const App = () => {
         const newObject = {
             name : newName ,
             number : newNumber,
-            id : persons.length +1
+            id : (persons.length +1).toString()
         }
         server_connection
             .addContact(newObject)
@@ -50,13 +50,19 @@ const App = () => {
             : addPerson(event)
     }
 
+    const deleteContact = (id)=>{
+        if(window.confirm(`delete user with id ${id} ???`)){
+        server_connection.deleteContact(id).then( ()=>setContats())
+        }
+    }
+
     return (
     <>
         <h2>Phonebook</h2>
         <Filter value={newFilter} onChange={doSearch}/>
-        <PersonForm newName={newName} addName={addName} newNumber={newNumber} addNumber={addNumber} checkInput={checkInput}/>
+        <PersonForm newName={newName} addName={addName} newNumber={newNumber} addNumber={addNumber} checkInput={checkInput} />
         <h2>Numbers</h2>
-        <Persons persons={persons} newFilter={newFilter} />
+        <Persons persons={persons} newFilter={newFilter} deleteContact={deleteContact} />
     </>
     )
 }
