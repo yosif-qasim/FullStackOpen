@@ -31,7 +31,6 @@ const App = () => {
 
     const addPerson = (event) => {
         event.preventDefault()
-        console.log("potato")
         const newObject = {
             name : newName ,
             number : newNumber,
@@ -45,9 +44,21 @@ const App = () => {
 
     const checkInput = (event) => {
         event.preventDefault()
-        persons.find((p) => p.name === newName )
-            ? alert(`${newName} is already added to phonebook`)
+        const personCheck = persons.find((p) => p.name === newName )
+        personCheck
+            ? replaceContact(personCheck.id)
             : addPerson(event)
+    }
+
+    const replaceContact = (id) => {
+        const newObject = {
+            name : newName ,
+            number : newNumber,
+            id : (persons.length +1).toString()
+        }
+        if(window.confirm(`contact with the same name already exists , do you want to replace it ???`)){
+            server_connection.updateContact(id , newObject).then(()=>setContats() )
+        }
     }
 
     const deleteContact = (id)=>{

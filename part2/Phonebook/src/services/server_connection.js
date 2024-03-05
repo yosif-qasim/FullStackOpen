@@ -21,4 +21,9 @@ const deleteContact = (id) => {
     console.log(url)
     return axios.delete(url)
 }
-export default {getContacts , addContact , deleteContact}
+
+const updateContact = (id , newContact) =>{
+    const url = baseurl + "/"+id;
+    return axios.put(url , newContact )
+}
+export default {getContacts , addContact , deleteContact , updateContact}
