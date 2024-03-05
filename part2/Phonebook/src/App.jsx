@@ -1,24 +1,19 @@
 import { useState } from 'react'
 import {useEffect} from "react";
-import axios from "axios";
 import Filter from "./components/Filter.jsx";
 import Persons from "./components/Persons.jsx";
 import PersonForm from "./components/PersonForm.jsx";
+import server_connection from "./services/server_connection.js";
+
 
 
 const App = () => {
 
     const setContats = () => {
-        console.log("inside setContact")
-        axios
-            .get("http://localhost:3001/persons")
-            .then( contacts =>{
-                console.log(contacts.data)
-                // initial = contacts.data
-                setPersons(contacts.data)
-            })
+        server_connection
+            .getContacts()
+            .then(contacts => setPersons(contacts) )
     }
-
 
      useEffect( setContats, [])
 
@@ -31,12 +26,8 @@ const App = () => {
     const addNumber = event => setNewNumber(event.target.value)
     const doSearch = event => setnewFilter(event.target.value)
 
-    const checkInput = (event) => {
-        event.preventDefault()
-        persons.find((p) => p.name === newName )
-            ? alert(`${newName} is already added to phonebook`)
-            : addPerson(event)
-    }
+
+
 
     const addPerson = (event) => {
         event.preventDefault()
@@ -46,9 +37,17 @@ const App = () => {
             number : newNumber,
             id : persons.length +1
         }
-        axios.post("http://localhost:3001/persons",newObject)
-            .then( response => setPersons(persons.concat(response.data)))
+        server_connection
+            .addContact(newObject)
+            .then( contact => setPersons(persons.concat(contact)) )
         setNewName('')
+    }
+
+    const checkInput = (event) => {
+        event.preventDefault()
+        persons.find((p) => p.name === newName )
+            ? alert(`${newName} is already added to phonebook`)
+            : addPerson(event)
     }
 
     return (

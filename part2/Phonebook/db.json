@@ -39,6 +39,16 @@
       "id": 8,
       "name": "yosif",
       "number": "123"
+    },
+    {
+      "id": 9,
+      "name": "lol",
+      "number": "lol"
+    },
+    {
+      "id": 10,
+      "name": "some_contact",
+      "number": "1222"
     }
   ]
 }
