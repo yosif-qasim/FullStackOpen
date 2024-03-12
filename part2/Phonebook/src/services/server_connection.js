@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// const baseurl = "/api/persons"
 const baseurl = "http://localhost:3001/persons"
 
 const getContacts = () => {
@@ -7,7 +8,7 @@ const getContacts = () => {
         .get(baseurl)
         .then( contacts =>{
             return (contacts.data)
-        })
+        }).catch(error=> console.log(error.message))
 }
 
 const addContact = (newContact) => {
